@@ -108,25 +108,50 @@ Public Class RentalForm
 
     Sub CostCalculator()
         Dim distance As Double
+        Dim diCharge As Double
+        Dim days As Integer
+        Dim daCharge As Integer
+        Dim discount As Double
         Dim total As Double
 
         If MilesradioButton.Checked = True Then
             distance = CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)
         Else
-            distance = (CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)) / 1.609
+            distance = Math.Round((CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)) / 1.609, 2)
         End If
 
         TotalMilesTextBox.Text = CStr(distance)
 
         Select Case distance
             Case 0 To 200
-                total = +0
+                diCharge = 0
             Case 201 To 500
-                total = +(distance * 0.12)
+                diCharge = distance * 0.12
             Case > 500
-                total = +(distance * 0.1)
+                diCharge = distance * 0.1
         End Select
 
+        MileageChargeTextBox.Text = CStr(diCharge)
+
+        days = CInt(DaysTextBox.Text)
+
+        daCharge = days * 15
+
+        DayChargeTextBox.Text = CStr(daCharge)
+
+        If Seniorcheckbox.Checked = True Then
+            discount = discount + 0.03
+        End If
+
+        If AAAcheckbox.Checked = True Then
+            discount = discount + 0.05
+        End If
+
+        TotalDiscountTextBox.Text = CStr(discount * 100)
+
+        total = Math.Round((1 - discount) * (diCharge + daCharge), 2)
+
+        TotalChargeTextBox.Text = CStr(total)
     End Sub
 
 
