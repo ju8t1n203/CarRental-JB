@@ -100,8 +100,34 @@ Public Class RentalForm
 
         If incorrect <> "" Then
             MessageBox.Show(incorrect, "Missing Fields", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            CostCalculator()
         End If
 
     End Sub
+
+    Sub CostCalculator()
+        Dim distance As Double
+        Dim total As Double
+
+        If MilesradioButton.Checked = True Then
+            distance = CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)
+        Else
+            distance = (CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)) / 1.609
+        End If
+
+        TotalMilesTextBox.Text = CStr(distance)
+
+        Select Case distance
+            Case 0 To 200
+                total = +0
+            Case 201 To 500
+                total = +(distance * 0.12)
+            Case > 500
+                total = +(distance * 0.1)
+        End Select
+
+    End Sub
+
 
 End Class
