@@ -117,10 +117,10 @@ Public Class RentalForm
         If MilesradioButton.Checked = True Then
             distance = CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)
         Else
-            distance = Math.Round((CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)) / 1.609, 2)
+            distance = Math.Round((CInt(EndOdometerTextBox.Text) - CInt(BeginOdometerTextBox.Text)) / 1.609, 3)
         End If
 
-        TotalMilesTextBox.Text = CStr(distance)
+        TotalMilesTextBox.Text = $"{distance} mi"
 
         Select Case distance
             Case 0 To 200
@@ -131,13 +131,13 @@ Public Class RentalForm
                 diCharge = distance * 0.1
         End Select
 
-        MileageChargeTextBox.Text = CStr(diCharge)
+        MileageChargeTextBox.Text = diCharge.ToString("C")
 
         days = CInt(DaysTextBox.Text)
 
         daCharge = days * 15
 
-        DayChargeTextBox.Text = CStr(daCharge)
+        DayChargeTextBox.Text = daCharge.ToString("C")
 
         If Seniorcheckbox.Checked = True Then
             discount = discount + 0.03
@@ -147,12 +147,11 @@ Public Class RentalForm
             discount = discount + 0.05
         End If
 
-        TotalDiscountTextBox.Text = CStr(discount * 100)
+        total = (1 - discount) * (diCharge + daCharge)
 
-        total = Math.Round((1 - discount) * (diCharge + daCharge), 2)
+        TotalDiscountTextBox.Text = (discount * total).ToString("C")
 
-        TotalChargeTextBox.Text = CStr(total)
+        TotalChargeTextBox.Text = total.ToString("C")
     End Sub
-
 
 End Class
