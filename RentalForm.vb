@@ -7,10 +7,10 @@ Option Explicit On
 Option Strict On
 Option Compare Text
 
+Imports System.Runtime.CompilerServices
 Imports System.Web
 
 Public Class RentalForm
-
 
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
         'prompts the user if they want to close the form
@@ -175,6 +175,30 @@ Public Class RentalForm
         TotalDiscountTextBox.Text = Nothing
         TotalChargeTextBox.Text = Nothing
 
+    End Sub
+
+    'top menu operations------------------------
+    Private Sub CalculateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateToolStripMenuItem.Click
+        CalculateButton.PerformClick()
+    End Sub
+
+    Private Sub ClearToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem1.Click
+        ClearButton.PerformClick()
+    End Sub
+
+    Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
+        ExitButton.PerformClick()
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        MsgBox("This form is used to calculate the cost of renting a car from ACME Car Rentals. 
+The zip code must be 5 digits. 
+The end odometer reading must exceed the beginning reading.
+The days must be a whole number.")
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        MsgBox("my name is justin bell, I created the software for this form. I think I deserve an A.")
     End Sub
 
 End Class
