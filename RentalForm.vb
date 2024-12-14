@@ -1,10 +1,11 @@
-﻿Option Explicit On
-Option Strict On
-Option Compare Text
-'Justin Bell
+﻿'Justin Bell
 'RCET0265
 'Car Rental
-'link
+'https://github.com/ju8t1n203/CarRental-JB
+
+Option Explicit On
+Option Strict On
+Option Compare Text
 
 Imports System.Web
 
@@ -152,6 +153,28 @@ Public Class RentalForm
         TotalDiscountTextBox.Text = (discount * total).ToString("C")
 
         TotalChargeTextBox.Text = total.ToString("C")
+    End Sub
+
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+
+        NameTextBox.Text = Nothing
+        AddressTextBox.Text = Nothing
+        CityTextBox.Text = Nothing
+        StateTextBox.Text = Nothing
+        ZipCodeTextBox.Text = Nothing
+        BeginOdometerTextBox.Text = Nothing
+        EndOdometerTextBox.Text = Nothing
+        DaysTextBox.Text = Nothing
+        MilesradioButton.Checked = True
+        KilometersradioButton.Checked = False
+        Seniorcheckbox.Checked = False
+        AAAcheckbox.Checked = False
+        TotalMilesTextBox.Text = Nothing
+        MileageChargeTextBox.Text = Nothing
+        DayChargeTextBox.Text = Nothing
+        TotalDiscountTextBox.Text = Nothing
+        TotalChargeTextBox.Text = Nothing
+
     End Sub
 
 End Class
