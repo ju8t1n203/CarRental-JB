@@ -380,6 +380,7 @@ Partial Class RentalForm
         '
         'SummaryButton
         '
+        Me.SummaryButton.Enabled = False
         Me.SummaryButton.Location = New System.Drawing.Point(316, 380)
         Me.SummaryButton.Name = "SummaryButton"
         Me.SummaryButton.Size = New System.Drawing.Size(75, 23)

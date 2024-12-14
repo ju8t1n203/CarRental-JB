@@ -11,7 +11,8 @@ Imports System.Runtime.CompilerServices
 Imports System.Web
 
 Public Class RentalForm
-
+    Private customers As Integer = 1
+    'buttons-------------------------------
     Private Sub ExitButton_Click(sender As Object, e As EventArgs) Handles ExitButton.Click
         'prompts the user if they want to close the form
         Dim result As DialogResult = MessageBox.Show(
@@ -107,6 +108,70 @@ Public Class RentalForm
 
     End Sub
 
+    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+
+        NameTextBox.Text = Nothing
+        AddressTextBox.Text = Nothing
+        CityTextBox.Text = Nothing
+        StateTextBox.Text = Nothing
+        ZipCodeTextBox.Text = Nothing
+        BeginOdometerTextBox.Text = Nothing
+        EndOdometerTextBox.Text = Nothing
+        DaysTextBox.Text = Nothing
+        MilesradioButton.Checked = True
+        KilometersradioButton.Checked = False
+        Seniorcheckbox.Checked = False
+        AAAcheckbox.Checked = False
+        TotalMilesTextBox.Text = Nothing
+        MileageChargeTextBox.Text = Nothing
+        DayChargeTextBox.Text = Nothing
+        TotalDiscountTextBox.Text = Nothing
+        TotalChargeTextBox.Text = Nothing
+
+        customers = customers + 1
+
+    End Sub
+
+    Private Sub SummaryButton_Click(sender As Object, e As EventArgs) Handles SummaryButton.Click
+        Dim miles As Double
+        Dim profits As Double
+
+        miles = CDbl(CStr(TotalMilesTextBox.Text).Replace(" mi", "").Trim()) + miles
+        profits = CDbl(CStr(TotalChargeTextBox.Text).Replace("$", "").Trim()) + profits
+
+        MessageBox.Show($"Total Customers Served: {customers}
+Total Miles Driven: {miles}
+Total Profit: {profits}")
+
+        ClearButton.PerformClick()
+    End Sub
+
+
+    'top menu operations------------------------
+    Private Sub CalculateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateToolStripMenuItem.Click
+        CalculateButton.PerformClick()
+    End Sub
+
+    Private Sub ClearToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem1.Click
+        ClearButton.PerformClick()
+    End Sub
+
+    Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
+        ExitButton.PerformClick()
+    End Sub
+
+    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
+        MsgBox("This form is used to calculate the cost of renting a car from ACME Car Rentals. 
+The zip code must be 5 digits. 
+The end odometer reading must exceed the beginning reading.
+The days must be a whole number.")
+    End Sub
+
+    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
+        MsgBox("my name is justin bell, I created the software for this form. I think I deserve an A.")
+    End Sub
+
+    'to be called upon---------------------------
     Sub CostCalculator()
         Dim distance As Double
         Dim diCharge As Double
@@ -153,52 +218,9 @@ Public Class RentalForm
         TotalDiscountTextBox.Text = (discount * total).ToString("C")
 
         TotalChargeTextBox.Text = total.ToString("C")
-    End Sub
 
-    Private Sub ClearButton_Click(sender As Object, e As EventArgs) Handles ClearButton.Click
+        SummaryButton.Enabled = True
 
-        NameTextBox.Text = Nothing
-        AddressTextBox.Text = Nothing
-        CityTextBox.Text = Nothing
-        StateTextBox.Text = Nothing
-        ZipCodeTextBox.Text = Nothing
-        BeginOdometerTextBox.Text = Nothing
-        EndOdometerTextBox.Text = Nothing
-        DaysTextBox.Text = Nothing
-        MilesradioButton.Checked = True
-        KilometersradioButton.Checked = False
-        Seniorcheckbox.Checked = False
-        AAAcheckbox.Checked = False
-        TotalMilesTextBox.Text = Nothing
-        MileageChargeTextBox.Text = Nothing
-        DayChargeTextBox.Text = Nothing
-        TotalDiscountTextBox.Text = Nothing
-        TotalChargeTextBox.Text = Nothing
-
-    End Sub
-
-    'top menu operations------------------------
-    Private Sub CalculateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CalculateToolStripMenuItem.Click
-        CalculateButton.PerformClick()
-    End Sub
-
-    Private Sub ClearToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ClearToolStripMenuItem1.Click
-        ClearButton.PerformClick()
-    End Sub
-
-    Private Sub ExitToolStripMenuItem1_Click(sender As Object, e As EventArgs) Handles ExitToolStripMenuItem1.Click
-        ExitButton.PerformClick()
-    End Sub
-
-    Private Sub HelpToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles HelpToolStripMenuItem.Click
-        MsgBox("This form is used to calculate the cost of renting a car from ACME Car Rentals. 
-The zip code must be 5 digits. 
-The end odometer reading must exceed the beginning reading.
-The days must be a whole number.")
-    End Sub
-
-    Private Sub AboutToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AboutToolStripMenuItem.Click
-        MsgBox("my name is justin bell, I created the software for this form. I think I deserve an A.")
     End Sub
 
 End Class
